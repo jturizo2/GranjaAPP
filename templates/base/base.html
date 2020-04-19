@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block tittle %} Aplicacion Granja {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+    {% block extrahead %}
+    {% endblock %}
+
+    {% block header %}
+    {% include 'base/header.html' %}
+    {% endblock %}
+    
+    {% block content %}
+    <h1>este es el bloque del contenido</h1>
+    {% endblock %}
+
+    {% block footer %}
+    <h1>este es el bloque de pie de pagina</h1>
+    {% endblock %}
+
+    {% block extrajs %}
+    {% endblock %}
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>
