@@ -1,0 +1,55 @@
+{% extends 'base/base.html' %}
+
+{ % block content % } 
+<table>
+    <thead>
+        <tr>
+            <td>Código de animal</td>
+            <td>Granja</td>
+            <td>Concepto de adquisición</td>
+            <td>Nombre del animal</td>
+            <td>Valor inicial [$]</td>
+            <td>Genero</td>
+            <td>Etapa Productiva</td>
+            <td>Raza</td>
+            <td>Hierro</td>
+            <td>Propósito</td>
+            <td>Fecha recibido</td>
+            <td>Fecha nacimiento</td>
+            <td>Código madre</td>
+            <td>Código padre</td>
+            <td>Acciones</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% if animal %}
+        {% animal in animales %}
+        <tr>
+            <td>{{animal.id}}</td>
+            <td>{{animal.Codigo_animal}}</td>
+            <td>{{animal.IdGranja.Name}}</td>
+            <td>{{animal.concepto.concepto}}</td>
+            <td>{{animal.nombre}}</td>
+            <td>{{animal.Valor_inicial}}</td>
+            <td>{{animal.Genero.genero}}</td>
+            <td>{{animal.Etapa_productiva.etapa_prod}}</td>
+            <td>{{animal.Raza.raza}}</td>
+            <td>{{animal.Hierro.idIronCode}}</td>
+            <td>{{animal.Proposito.tipo_proposito}}</td>
+            <td>{{animal.Fecha_recibida}}</td>
+            <td>{{animal.Fecha_nacimiento}}</td>
+            <td>{{animal.Código_mama}}</td>
+            <td>{{animal.Código_papa}}</td>
+            <td>
+                <a class="btn btn-primary" href="{'animal/editar/{animal.id}/'}">Editar</a>
+                <a class="btn btn-danger" href="{'animal/eliminar/{animal.id}/'}">Eliminar</a>
+
+            </td>
+        </tr>
+         {% endfor %}
+         {% else %}
+        <h1> No se encuentran animales registrados</h1>
+        {% endif %}
+        </tbody>
+</table>
+{% endblock %}
