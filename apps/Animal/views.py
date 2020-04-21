@@ -7,37 +7,37 @@ def index(request):
     return render(request, 'Animal/index.html')
 
 def animal_form(request):
-    if request.method = 'POST':
+    if request.method == 'POST':
         form = animalForm(request.POST)
         if form.is_valid():
             form.save()
-        return redirect('animal/index.html')
+        return redirect('animal:list')
     else:
         form = animalForm()
     return render(request,'animal/Animal_form.html',{'form': form})
 
 def animal_list(request):
-    amimales = animal.objects.all().order_by('id')
-    contexto = {'animal': animales}
+    animales = animal.objects.all().order_by('id')
+    contexto = {'animals': animales}
     return render(request, 'animal/animal_list.html', contexto)
 
 def animal_edit(request, id_animal):
-    animal = animal.objects.get(id=id_animal)
-    if request.method = 'GET':
-        form = animalForm(instance=animal)
+    animals = animal.objects.get(id=id_animal)
+    if request.method == 'GET':
+        form = animalForm(instance=animals)
     else:
-        form = animalForm(request.POST,instance=animal)
+        form = animalForm(request.POST,instance=animals)
         if form.is_valid():
             form.save()
-        return redirect('animal/animal_list.html')
+        return redirect('animal:list')
     return  render(request,'Animal/animal_form.html',{'form': form})
 
 def animal_delete(request, id_animal):
-    animal = animal.Objects.get(id=id_animal)
-    if request.method = 'POST':
-        animal.delete()
-        return redirect('Animal/animal_list.html')
-    return  render(request,'Animal/animal_delete.html',{'animal': animal})
+    animals = animal.objects.get(id=id_animal)
+    if request.method == 'POST':
+        animals.delete()
+        return redirect('animal:list')
+    return  render(request,'Animal/animal_delete.html',{'animal': animals})
 
 
 

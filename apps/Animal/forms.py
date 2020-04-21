@@ -1,5 +1,5 @@
 from django import forms
-from apps.Animal.model import animal
+from apps.Animal.models import animal
 
 class animalForm(forms.ModelForm):
     class Meta:
@@ -23,20 +23,20 @@ class animalForm(forms.ModelForm):
         ]
 
         labels = {
-                'Codigo_animal': 'Código de animal'
-                'IdGranja': 'Granja'
-                'concepto': 'Concepto de adquisición'
-                'nombre': 'Nombre del animal'
-                'Valor_inicial': 'Valor inicial [$]'
-                'Genero': 'Genero'
-                'Etapa_productiva': 'Etapa Productiva'
-                'Raza': 'Raza'
-                'Hierro': 'Hierro'
-                'Proposito': 'Propósito'
-                'Fecha_recibida': 'Fecha recibido'
-                'Fecha_nacimiento': 'Fecha nacimiento'
-                'Código_mama': 'Código madre'
-                'Código_papa': 'Código padre' 
+                'Codigo_animal': 'Código de animal',
+                'IdGranja': 'Granja',
+                'concepto': 'Concepto de adquisición',
+                'nombre': 'Nombre del animal',
+                'Valor_inicial': 'Valor inicial [$]',
+                'Genero': 'Genero',
+                'Etapa_productiva': 'Etapa Productiva',
+                'Raza': 'Raza',
+                'Hierro': 'Hierro',
+                'Proposito': 'Propósito',
+                'Fecha_recibida': 'Fecha recibido',
+                'Fecha_nacimiento': 'Fecha nacimiento',
+                'Código_mama': 'Código madre',
+                'Código_papa': 'Código padre'
         }
 
         widgets = {
