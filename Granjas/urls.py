@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^granja/', include('apps.Granja.urls')),
     url(r'^granjero/', include('apps.Granjero.urls')),
     url(r'^transaccion/', include('apps.trans.urls')),
-    url(r'^animal/', include('apps.Animal.urls')),
+    url(r'^animal/', include('apps.Animal.urls', namespace='animal')),
 ]
 
 #
