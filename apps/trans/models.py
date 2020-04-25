@@ -34,7 +34,7 @@ class ClassTrans (models.Model):
 class transaction (models.Model):
     TypeTrans = models.ForeignKey (TypeTrans, null = True, blank = True, on_delete = models.CASCADE)
     classTrans = models.ForeignKey (ClassTrans, null = True, blank = True, on_delete = models.CASCADE)
-    date = models.DateField(default = datetime.date.today())
+    date = models.DateField(default = datetime.date.today)
     AnimalCode = models.ForeignKey (animal, null = True, blank = True, on_delete = models.CASCADE)
     detail = models.CharField(max_length = 100)
     Value = models.FloatField()

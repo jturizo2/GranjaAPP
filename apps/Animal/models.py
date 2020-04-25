@@ -2,7 +2,6 @@ from django.db import models
 import datetime
 from apps.Granjero.models import hierro
 from apps.Granja.models import granja  
-# Create your models here.
 
 class concepto (models.Model):
     concepto =  models.CharField(max_length = 30)
@@ -45,7 +44,7 @@ class animal (models.Model):
     Raza = models.ForeignKey (raza, null = True, blank = True, on_delete = models.CASCADE)
     Hierro = models.ForeignKey (hierro, null = True, blank = True, on_delete = models.CASCADE)
     Proposito = models.ForeignKey (proposito, null = True, blank = True, on_delete = models.CASCADE)
-    Fecha_recibida = models.DateField(default = datetime.date.today())
+    Fecha_recibida = models.DateField(default = datetime.date.today)
     Fecha_nacimiento = models.DateField()
     Código_mama = models.CharField(max_length = 20, null = True, blank = True)
     Código_papa = models.CharField(max_length = 20, null = True, blank = True)

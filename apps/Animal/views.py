@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from apps.Animal.forms import animalForm
 from apps.Animal.models import animal
-# Create your views here.
+from django.contrib.auth.decorators import login_required
+
+
 def index(request):
     return render(request, 'Animal/index.html')
 
@@ -16,6 +18,7 @@ def animal_form(request):
         form = animalForm()
     return render(request,'animal/Animal_form.html',{'form': form})
 
+@login_required
 def animal_list(request):
     animales = animal.objects.all().order_by('id')
     contexto = {'animals': animales}

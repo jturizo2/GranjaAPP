@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,8 +41,12 @@ INSTALLED_APPS = [
     'apps.Granja',
     'apps.Granjero',
     'apps.Animal',
-    'apps.trans'
+    'apps.trans',
+    'apps.usuario',
+    'apps.gallery',
 ]
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -124,3 +129,14 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+LOGIN_REDIRECT_URL = reverse_lazy('animal:list')
+LOGOUT_REDIRECT_URL = reverse_lazy('login')
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'jorgeluissilvacorrea@gmail.com'
+DEFAULT_FROM_EMAIL = 'jorgeluissilvacorrea@gmail.com'
+EMAIL_HOST_PASSWORD = 'Jorge199422.'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
