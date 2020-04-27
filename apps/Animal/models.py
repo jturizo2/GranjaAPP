@@ -48,6 +48,7 @@ class animal (models.Model):
     Fecha_nacimiento = models.DateField()
     Código_mama = models.CharField(max_length = 20, null = True, blank = True)
     Código_papa = models.CharField(max_length = 20, null = True, blank = True)
+    image = models.ImageField(upload_to = 'Animales/', default = 'gallery/static/images/no-img.jpg')
     
     def __str__(self):
         return "%s" % (self.Codigo_animal)

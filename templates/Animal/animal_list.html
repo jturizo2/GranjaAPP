@@ -2,7 +2,69 @@
 
 {% block content %} 
 <div class="container">
-    
+    <div class="row">
+        <!--Agregar un animal -->
+        <div class="col-12">
+            <a href="{% url 'animal:new' %}" class="btn btn-success ">Agregar nuevo animal</a>
+        </div>
+    </div>
+    <div class="row">
+        <!--Buscador de animales-->
+        <div class="col-12">
+
+        </div>
+    </div>
+    <div class="row">
+        <!--Lista de Animales -->
+        <div class="col-12">
+            {% if animals %}
+            <table class="table-bordered">
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Código de animal</td>
+                        <td>Granja</td>
+                        <td>Concepto de adquisición</td>
+                        <td>Nombre del animal</td>
+                        <td>Valor inicial [$]</td>
+                        <td>Genero</td>
+                        <td>Acciones</td>
+                        <td>Imagen</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    {% for animal in animals %}
+                    <tr>
+                        <td>{{animal.id}}</td>
+                        <td>{{animal.Codigo_animal}}</td>
+                        <td>{{animal.IdGranja.Name}}</td>
+                        <td>{{animal.concepto.concepto}}</td>
+                        <td>{{animal.nombre}}</td>
+                        <td>{{animal.Valor_inicial}}</td>
+                        <td>{{animal.Genero.genero}}</td>
+                        <td><img src="{{ animal.image.url }}"></td>
+                        <td>
+                            <div class="btn-group-vertical">
+                            <a class="btn btn-primary" href="{% url 'animal:edit' animal.id %}">Editar</a>
+                            <a class="btn btn-danger" href="{% url 'animal:delete' animal.id %}">Eliminar</a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+                    {% endfor %}
+                    {% else %}
+                    <h1> No se encuentran animales registrados</h1>
+                     {% endif %}
+           
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+<!--
     <table class="table-bordered">
         <thead>
             <tr>
@@ -56,5 +118,4 @@
             {% endif %}
             </tbody>
     </table>
-</div>
-{% endblock %}
+-->

@@ -7,7 +7,6 @@ class animalForm(forms.ModelForm):
 
         fields = [
                 'Codigo_animal',
-                'IdGranja',
                 'concepto',
                 'nombre',
                 'Valor_inicial',
@@ -20,11 +19,11 @@ class animalForm(forms.ModelForm):
                 'Fecha_nacimiento',
                 'Código_mama',
                 'Código_papa',
+                'image',
         ]
 
         labels = {
                 'Codigo_animal': 'Código de animal',
-                'IdGranja': 'Granja',
                 'concepto': 'Concepto de adquisición',
                 'nombre': 'Nombre del animal',
                 'Valor_inicial': 'Valor inicial [$]',
@@ -36,12 +35,12 @@ class animalForm(forms.ModelForm):
                 'Fecha_recibida': 'Fecha recibido',
                 'Fecha_nacimiento': 'Fecha nacimiento',
                 'Código_mama': 'Código madre',
-                'Código_papa': 'Código padre'
+                'Código_papa': 'Código padre',
+                'image': 'Imagen',
         }
 
         widgets = {
                 'Codigo_animal': forms.TextInput(attrs={'class': 'form-control'}),
-                'IdGranja': forms.Select(attrs={'class': 'form-control'}),
                 'concepto': forms.Select(attrs={'class': 'form-control'}),
                 'nombre': forms.TextInput(attrs={'class': 'form-control'}),
                 'Valor_inicial': forms.TextInput(attrs={'class': 'form-control'}),
@@ -50,8 +49,8 @@ class animalForm(forms.ModelForm):
                 'Raza': forms.Select(attrs={'class': 'form-control'}),
                 'Hierro': forms.Select(attrs={'class': 'form-control'}),
                 'Proposito': forms.Select(attrs={'class': 'form-control'}),
-                'Fecha_recibida': forms.SelectDateWidget(attrs={'class': 'form-control'}),
-                'Fecha_nacimiento': forms.SelectDateWidget(attrs={'class': 'form-control'}),
+                'Fecha_recibida': forms.DateInput(attrs={'class': 'form-control', 'type':'date'}),
+                'Fecha_nacimiento': forms.DateInput(attrs={'class': 'form-control', 'type':'date'}),
                 'Código_mama': forms.TextInput(attrs={'class': 'form-control'}),
                 'Código_papa': forms.TextInput(attrs={'class': 'form-control'}),
         }

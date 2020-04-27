@@ -1,10 +1,18 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">App Granja</a>  
+    <a class="navbar-brand" href="{% url 'granja:list' %}">App Granja</a>  
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
+        {% if granja %}
         <li class="nav-item active">
-          <a class="nav-link" href="#">Animales <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="{% url 'granja:admin' request.session.idgranja %}">Granja, {{ request.session.granja}}. <span class="sr-only"></span></a>
+        </li>
+        {% endif %}
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'granja:list' %}">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'animal:list' %}">Animales <span class="sr-only">(current)</span></a>
         </li>
       </ul>
       <a> Bienvenido {{ request.user.first_name  }} {{request.user.last_name }}, ({{request.user.username}})</a>

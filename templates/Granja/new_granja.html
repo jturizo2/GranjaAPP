@@ -1,8 +1,11 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% block header %}
+{% include 'base/header_granja.html' %}
+{% endblock %}
 {% block content %} 
 <div class="container">
-  <form action="{% url 'granja:new' %}" method="post" enctype="multipart/form-data">
+  <form  method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p}}
     <input type="submit" value="Guardar" />

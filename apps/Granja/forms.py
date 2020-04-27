@@ -32,5 +32,4 @@ class granja_from(forms.ModelForm):
                 'Hec': forms.NumberInput(attrs={'class': 'form-control'}),
                 'Div':forms.NumberInput(attrs={'class': 'form-control'}),
                 'NumPozos': forms.NumberInput(attrs={'class': 'form-control'}),
-
         }

@@ -1,3 +1,33 @@
 {% extends 'base/base.html' %}
+{% block content %} 
+<div class="container">
+  <div class="row m-3">
+    <div class="card m-3 w-100 h-100">
+      <div class="card-header">
+        Caacteristicas de la granja
+      </div>
+      <div class="card-body">
+        <img class="card-img-top image" src="{{ granj.image.url }}" alt="Card image cap">
+        <h5 class="card-title">Nombre: {{ granj.Name }}</h5>
+        <p class="card-text">Código:  {{ granj.Cod }}</p>
+        <p class="card-text">Hectareas: {{ granj.Hec }} </p>
+        <p class="card-text">Diviciones: {{ granj.Div }} </p>
+        <p class="card-text">Número de pozos:  {{ granj.NumPozos }}</p>
+      </div>
+    </div>  
+  </div>
 
+      <!-- Animales-->
+      <div class="col-sm-3">
+        <div class="card m-3 w-100 h-100" >
+          <a href="{% url 'animal:list' %}"><img  class="card-img-top" src="/media/gallery/Animales.png" alt="Card image cap"> </a>
+          <div class="card-body">
+            <h5 class="card-title">Administración de animales</h5>
+            <p class="card-text">En esta opción puedes agregar, editar animales que pertenezcan a tu Granja</p>
+          </div>
+        </div>
+      </div>  
+</div>
+
+{% endblock %}
 

@@ -5,11 +5,20 @@ from apps.Granja.models import granja
 from apps.Granja.forms import granja_from
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-def index(request):
-    return render(request, 'Granja/index.html')
+@login_required
+def granja_admin(request,id_granja):
+    granj = granja.objects.filter(id=id_granja)[0]
+    request.session['granja'] = granj.Name
+    request.session['idgranja'] = granj.id
+    contexto = {'granja': request.session['granja'],
+                'idgranja': request.session['idgranja'],
+                'granj':granj}
+    return render(request, 'Granja/index.html', contexto)
 
+@login_required
 def granja_new(request):
     if request.method == 'GET':
         form = granja_from()
