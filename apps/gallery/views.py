@@ -2,7 +2,7 @@ from django.shortcuts import render
 from apps.gallery.forms import ImageForm
 from apps.gallery.models import Image
 from django.http import HttpResponseRedirect
-
+ 
 def upload_image(request):
     if request.method == 'GET':
         return render(request, 'gallery/upload_image.html')

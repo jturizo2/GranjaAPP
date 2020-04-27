@@ -11,7 +11,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^granja/', login_required(include('apps.Granja.urls'))),
+    url(r'^granja/', include('apps.Granja.urls', namespace='granja')),
     url(r'^granjero/', include('apps.Granjero.urls')),
     url(r'^transaccion/', include('apps.trans.urls')),
     url(r'^animal/', include('apps.Animal.urls', namespace='animal')),
@@ -31,7 +31,7 @@ urlpatterns = [
     url(r'^reset/done', PasswordResetCompleteView.as_view(template_name='registro/password_reset_complete.html'),name='password_reset_complete'),
 
     #Imagenes
-    path('gallery/', include('apps.gallery.urls'))
+    path('gallery/', include('apps.gallery.urls')),
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

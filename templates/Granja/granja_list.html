@@ -1,0 +1,115 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block enlaces %}
+<link rel="stylesheet" href="{% static 'css/cardcus.css' %}">
+{% endblock %}
+
+{% block content %} 
+<div class="container mt-5 mb-2">
+    <div class="row">
+          <div class="col-sm-3">
+            <div class="card m-1 w-100 h-100" >
+              <img class="card-img-top" src="/media/gallery/+.png" alt="Card image cap"> 
+              <div class="card-body">
+                <h5 class="card-title">Agrega una granja</h5>
+                <p class="card-text">En esta opción puedes agregar las granjas que quieras!</p>
+              </div>
+              <div class="card-footer">
+                  <div class="row">
+                      <div class="col-sm-12"> <a href="{% url 'granja:new' %}" class="btn btn-success ">Agregar</a></div>
+                  </div>
+              </div>
+            </div>
+        </div>  
+        <!-- -->
+        {% if object_list %}
+            {% for granja in object_list %}
+                <div class="col-sm-3 ">
+                    <div class="card m-3 w-100 h-100" >
+                    <img class="card-img-top image" src="{{ granja.image.url }}" alt="Card image cap"> 
+                    <div class="card-body">
+                        <h5 class="card-title">{{ granja.Name }}</h5>
+                        <p class="card-text"> {{ granja.Details }} </p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-sm-6"> <a href="{% url 'granja:edit' granja.id %}" class="btn btn-success ">Editar</a></div>
+                            <div class="col-sm-6"> <a href="{% url 'granja:delete' granja.id %}" class="btn btn-danger ">Borrar</a></div>
+                        </div>
+                    </div>
+                    </div>
+                </div> 
+            {% endfor %}
+        {% else %}
+        <div class="col-sm-3 ">
+            <div class="card m-3 w-100 h-100" >
+            <div class="card-body">
+                <h5 class="card-title">No se encuentran Granjas registradas</h5>
+                <p class="card-text">Si desea por favor agregue suprimera granja, en el boton agregar de la primera tarjeta </p>
+            </div>
+            </div>
+        </div> 
+        {% endif %}
+        <!-- -->
+    </div>
+</div>
+{% endblock %}
+
+<!--
+<div class="container">
+    <table class="table-bordered">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Código de animal</td>
+                <td>Granja</td>
+                <td>Concepto de adquisición</td>
+                <td>Nombre del animal</td>
+                <td>Valor inicial [$]</td>
+                <td>Genero</td>
+                <td>Etapa Productiva</td>
+                <td>Raza</td>
+                <td>Hierro</td>
+                <td>Propósito</td>
+                <td>Fecha recibido</td>
+                <td>Fecha nacimiento</td>
+                <td>Código madre</td>
+                <td>Código padre</td>
+                <td>Acciones</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% if animals %}
+            {% for animal in animals %}
+            <tr>
+                <td>{{animal.id}}</td>
+                <td>{{animal.Codigo_animal}}</td>
+                <td>{{animal.IdGranja.Name}}</td>
+                <td>{{animal.concepto.concepto}}</td>
+                <td>{{animal.nombre}}</td>
+                <td>{{animal.Valor_inicial}}</td>
+                <td>{{animal.Genero.genero}}</td>
+                <td>{{animal.Etapa_productiva.etapa_prod}}</td>
+                <td>{{animal.Raza.raza}}</td>
+                <td>{{animal.Hierro.idIronCode}}</td>
+                <td>{{animal.Proposito.tipo_proposito}}</td>
+                <td>{{animal.Fecha_recibida}}</td>
+                <td>{{animal.Fecha_nacimiento}}</td>
+                <td>{{animal.Código_mama}}</td>
+                <td>{{animal.Código_papa}}</td>
+                <td>
+                    <div class="btn-group-vertical">
+                    <a class="btn btn-primary" href="{% url 'granja:edit' animal.id %}">Editar</a>
+                    <a class="btn btn-danger" href="{% url 'granja:delete' animal.id %}">Eliminar</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <h1> No se encuentran animales registrados</h1>
+            {% endif %}
+            </tbody>
+    </table>
+</div>
+
+ -->
