@@ -24,7 +24,7 @@ def animal_form(request):
                                 Genero=form.cleaned_data["Genero"],
                                 Etapa_productiva=form.cleaned_data["Etapa_productiva"],
                                 Raza=form.cleaned_data["Raza"],
-                                Hierro=form.cleaned_data["Hierro"],
+                                propietario=form.cleaned_data["propietario"],
                                 Proposito=form.cleaned_data["Proposito"],
                                 Fecha_recibida=form.cleaned_data["Fecha_recibida"],
                                 Fecha_nacimiento=form.cleaned_data["Fecha_nacimiento"],
@@ -51,7 +51,7 @@ def animal_edit(request, id_animal):
     if request.method == 'GET':
         form = animalForm(instance=animals)
     else:
-        form = animalForm(request.POST,instance=animals)
+        form = animalForm(request.POST,request.FILES,instance=animals)
         if form.is_valid():
             form.save()
         return redirect('animal:list')

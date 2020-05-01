@@ -1,0 +1,53 @@
+{% extends 'base/base.html' %}
+
+{% block content %} 
+<div class="container">
+    <div class="row">
+        <!--Agregar un animal -->
+        <div class="col-12 ">
+            <div class="m-5 center">
+                <a href="{% url 'granja:new_genero' %}" class="btn btn-success ">Agregar nuevo Genero</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!--Buscador de animales-->
+        <div class="col-12">
+
+        </div>
+    </div>
+    <div class="row">
+        <!--Lista de Animales -->
+        <div class="col-12">
+            {% if object_list %}
+            <table class="table-bordered">
+                <thead>
+                    <tr>
+                        <td>Genero</td>
+                        <td>Acciones</td>
+                    </tr>
+                </thead>
+                <tbody> 
+                    {% for genero in object_list %}
+                    <tr>
+                        <td>{{genero.genero}}</td>
+                        <td>
+                            <div class="btn-group-vertical">
+                            <a class="btn btn-primary" href="{% url 'granja:edit_genero' genero.id %}">Editar</a>
+                            <a class="btn btn-danger" href="{% url 'granja:delete_genero' genero.id %}">Eliminar</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+                    
+                    {% else %}
+                    <h1> No se encuentran Generos registrados</h1>
+                     {% endif %}
+           
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base/base.html' %}
+
+{% block content %} 
+<div class="container">
+    <div class="row">
+        <!--Agregar un animal -->
+        <div class="col-12 ">
+            <div class="m-5 center">
+                <a href="{% url 'granja:new_serviInsu' %}" class="btn btn-success ">Agregar un nuevo insumo o servicio</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!--Buscador de animales-->
+        <div class="col-12">
+
+        </div>
+    </div>
+    <div class="row">
+        <!--Lista de Animales -->
+        <div class="col-12">
+            {% if object_list %}
+            <table class="table-bordered">
+                <thead>
+                    <tr>
+                        <td>Tipo</td>
+                        <td>Nombre</td>
+                        <td>Unidad de medida</td>
+                        <td>Detalle</td>
+                        <td>Proveedor</td>
+                        <td>Telefono</td>
+                        <td>Acciones</td>
+                    </tr>
+                </thead>
+                <tbody> 
+                    {% for serviInsu in object_list %}
+                    <tr>
+                        <td>{{serviInsu.Tipo}}</td>
+                        <td>{{serviInsu.Nombre}}</td>
+                        <td>{{serviInsu.Valor_Unidad}}</td>
+                        <td>{{serviInsu.Detalle}}</td>
+                        <td>{{serviInsu.Proveedor}}</td>
+                        <td>{{serviInsu.Telefono}}</td>
+                        <td>
+                            <div class="btn-group-vertical">
+                            <a class="btn btn-primary" href="{% url 'granja:edit_serviInsu' serviInsu.id %}">Editar</a>
+                            <a class="btn btn-danger" href="{% url 'granja:delete_serviInsu' serviInsu.id %}">Eliminar</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+                    
+                    {% else %}
+                    <h1> No se encuentran insumos o servicios registrados</h1>
+                     {% endif %}
+           
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'base/base.html' %}
+
+{% block content %} 
+<div class="container">
+    <div class="row">
+        <!--Agregar un animal -->
+        <div class="col-12 ">
+            <div class="m-5 center">
+                <a href="{% url 'granja:new_concepto' %}" class="btn btn-success ">Agregar nuevo concepto</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!--Buscador de animales-->
+        <div class="col-12">
+
+        </div>
+    </div>
+    <div class="row">
+        <!--Lista de Animales -->
+        <div class="col-12">
+            {% if object_list %}
+            <table class="table-bordered">
+                <thead>
+                    <tr>
+                        <td>Concepto</td>
+                        <td>Detalle</td>
+                        <td>Acciones</td>
+                    </tr>
+                </thead>
+                <tbody> 
+                    {% for concepto in object_list %}
+                    <tr>
+                        <td>{{concepto.concepto}}</td>
+                        <td>{{concepto.detalle_concepto}}</td>
+                        <td>
+                            <div class="btn-group-vertical">
+                            <a class="btn btn-primary" href="{% url 'granja:edit_concepto' concepto.id %}">Editar</a>
+                            <a class="btn btn-danger" href="{% url 'granja:delete_concepto' concepto.id %}">Eliminar</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+                    
+                    {% else %}
+                    <h1> No se encuentran conceptos registrados</h1>
+                     {% endif %}
+           
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base/base.html' %}
+
+{% block content %} 
+<div class="container">
+    <div class="row">
+        <!--Agregar un animal -->
+        <div class="col-12 ">
+            <div class="m-5 center">
+                <a href="{% url 'granja:new_propietario' %}" class="btn btn-success ">Agregar un nuevo propietario</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!--Buscador de animales-->
+        <div class="col-12">
+
+        </div>
+    </div>
+    <div class="row">
+        <!--Lista de Animales -->
+        <div class="col-12">
+            {% if object_list %}
+            <table class="table-bordered">
+                <thead>
+                    <tr>
+                        <td>Nombre</td>
+                        <td>Apellido</td>
+                        <td>Correo</td>
+                        <td>Telefono</td>
+                        <td>Foto Propietario</td>
+                        <td>Foto Coto hierro</td>
+                        <td>Acciones</td>
+                    </tr>
+                </thead>
+                <tbody> 
+                    {% for propietario in object_list %}
+                    <tr>
+                        <td>{{propietario.name}}</td>
+                        <td>{{propietario.LastName}}</td>
+                        <td>{{propietario.correo}}</td>
+                        <td>{{propietario.Telefono}}</td>
+                        <td><img src="{{propietario.imagePropietario.url}}" alt="Card image cap"> </td>
+                        <td><img src="{{propietario.imageHierro.url}}" alt="Card image cap"> </td>
+                        <td>
+                            <div class="btn-group-vertical">
+                            <a class="btn btn-primary" href="{% url 'granja:edit_propietario' propietario.id %}">Editar</a>
+                            <a class="btn btn-danger" href="{% url 'granja:delete_propietario' propietario.id %}">Eliminar</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+                    
+                    {% else %}
+                    <h1> No se encuentran propietarios registrados</h1>
+                     {% endif %}
+           
+        </div>
+    </div>
+
+</div>
+{% endblock %}

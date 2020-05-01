@@ -1,6 +1,6 @@
 from django.db import models
 import datetime
-from apps.Granjero.models import hierro
+from apps.Granjero.models import propietario
 from apps.Granja.models import granja  
 
 class concepto (models.Model):
@@ -42,7 +42,7 @@ class animal (models.Model):
     Genero = models.ForeignKey (genero, null = True, blank = True, on_delete = models.CASCADE)
     Etapa_productiva = models.ForeignKey (etapa_productiva, null = True, blank = True, on_delete = models.CASCADE) 
     Raza = models.ForeignKey (raza, null = True, blank = True, on_delete = models.CASCADE)
-    Hierro = models.ForeignKey (hierro, null = True, blank = True, on_delete = models.CASCADE)
+    propietario = models.ForeignKey (propietario, null = True, blank = True, on_delete = models.CASCADE)
     Proposito = models.ForeignKey (proposito, null = True, blank = True, on_delete = models.CASCADE)
     Fecha_recibida = models.DateField(default = datetime.date.today)
     Fecha_nacimiento = models.DateField()

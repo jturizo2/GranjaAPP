@@ -1,0 +1,53 @@
+{% extends 'base/base.html' %}
+
+{% block content %} 
+<div class="container">
+    <div class="row">
+        <!--Agregar un animal -->
+        <div class="col-12 ">
+            <div class="m-5 center">
+                <a href="{% url 'granja:new_proposito' %}" class="btn btn-success ">Agregar un nuevo proposito</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!--Buscador de animales-->
+        <div class="col-12">
+
+        </div>
+    </div>
+    <div class="row">
+        <!--Lista de Animales -->
+        <div class="col-12">
+            {% if object_list %}
+            <table class="table-bordered">
+                <thead>
+                    <tr>
+                        <td>Tipo de proposito</td>
+                        <td>Acciones</td>
+                    </tr>
+                </thead>
+                <tbody> 
+                    {% for proposito in object_list %}
+                    <tr>
+                        <td>{{proposito.tipo_proposito}}</td>
+                        <td>
+                            <div class="btn-group-vertical">
+                            <a class="btn btn-primary" href="{% url 'granja:edit_proposito' proposito.id %}">Editar</a>
+                            <a class="btn btn-danger" href="{% url 'granja:delete_proposito' proposito.id %}">Eliminar</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+                    
+                    {% else %}
+                    <h1> No se encuentran Tipos de propositos registrados</h1>
+                     {% endif %}
+           
+        </div>
+    </div>
+
+</div>
+{% endblock %}

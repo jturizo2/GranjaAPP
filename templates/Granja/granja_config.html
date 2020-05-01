@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+{% block content %} 
+
+<div class="container">
+    <h3> Configuraciones</h3>
+    <ul class="list-group">
+        <a href="{% url 'granja:list_concepto' %}"><li class="list-group-item">Conceptos de adquicición</li></a>
+        <a href="{% url 'granja:list_genero' %}"><li class="list-group-item">Genero</li></a>
+        <a href="{% url 'granja:list_eProductiva' %}"><li class="list-group-item">Etapa Productiva</li></a>
+        <a href="{% url 'granja:list_raza' %}"><li class="list-group-item">Raza</li></a>
+        <a href="{% url 'granja:list_proposito' %}"><li class="list-group-item">Propositos</li></a>
+        <a href="{% url 'granja:list_propietario' %}"><li class="list-group-item">Propietarios</li></a>
+        <a href="{% url 'granja:list_serviInsu' %}"><li class="list-group-item">Servicios o Servicios</li></a>
+    </ul>
+</div>
+
+{% endblock %}

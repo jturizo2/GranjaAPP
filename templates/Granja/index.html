@@ -16,7 +16,7 @@
       </div>
     </div>  
   </div>
-
+<div class="row">
       <!-- Animales-->
       <div class="col-sm-3">
         <div class="card m-3 w-100 h-100" >
@@ -26,7 +26,19 @@
             <p class="card-text">En esta opción puedes agregar, editar animales que pertenezcan a tu Granja</p>
           </div>
         </div>
+      </div>       
+      <!-- Configuraciones-->
+      <div class="col-sm-3">
+        <div class="card m-3 w-100 h-100" >
+          <a href="{% url 'granja:config' %}"><img  class="card-img-top" src="/media/gallery/tool.PNG" alt="Card image cap"> </a>
+          <div class="card-body">
+            <h5 class="card-title">Configiraciones</h5>
+            <p class="card-text">En esta area podrás realizar las configuraciones básica el aplicativo.</p>
+          </div>
+        </div>
       </div>  
+    </div>  
+
 </div>
 
 {% endblock %}
