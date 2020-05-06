@@ -1,0 +1,48 @@
+{% extends 'base/base.html' %}
+
+{% block content %} 
+<div class="container">
+    <div class="row">
+        <!--Lista de Animales -->
+        <div class="col-12">
+            {% if animals %}
+                {% for animal in animals %}
+                <div class="row">
+                    <div class="col-ms">
+                        <h3><b>Imagen del animal</b></h3>
+                        <img width="304" height="236" src="{{ animal.image.url }}">
+                        <h3><b>Imagen del hierro</b></h3>
+                        <img width="304" height="236" src="{{animal.propietario.imageHierro.url}}">
+                    </div>
+                    <div class="col-ms">
+                        <div class="card-body">
+                            <h5 class="card-title">Descripción del animal</h5>
+                            <p class="card-text">
+                                <b>Código de animal:</b>{{ animal.Codigo_animal }}<br>
+                                <b>Nombre del animal:</b>{{ animal.nombre }}<br>
+                                <b>Concepto de adquisición:</b> {{ animal.concepto }} <br>
+                                <b>Valor inicial [$]:</b> {{ animal.Valor_inicial }} <br>
+                                <b>Genero:</b> {{ animal.Genero }} <br>
+                                <b>Etapa Productiva:</b> {{ animal.Etapa_productiva }} <br>
+                                <b>Raza:</b> {{ animal.Raza }} <br>
+                                <b>Propietario:</b> {{ animal.propietario.name }} {{ animal.propietario.LastName }} <br>
+                                <b>Propósito:</b> {{ animal.Proposito }} <br>
+                                <b>Fecha recibido:</b> {{ animal.Fecha_recibida }} <br>
+                                <b>Fecha nacimiento:</b> {{ animal.Fecha_nacimiento }} <br>
+                                <b>Código madre:</b> {{ animal.Código_mama }} <br>
+                                <b>Fecha padre:</b> {{ animal.Código_papa }} <br>
+                                </p>
+                                
+                                <a class="btn btn-primary" href="{% url 'animal:edit' animal.id %}">Editar</a>
+                            <a class="btn btn-danger" href="{% url 'animal:delete' animal.id %}">Eliminar</a>
+                            </div>
+                    </div>
+                </div>  
+            {% endfor %}
+        {% else %}
+            <h1> Animal no registrado</h1>
+        {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

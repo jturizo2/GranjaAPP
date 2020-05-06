@@ -12,8 +12,8 @@
 <div class="container mt-5 mb-2">
     <div class="row">
           <div class="col-sm-3">
-            <div class="card m-3 w-100 h-100" >
-              <img  class="card-img-top" src="/media/gallery/+.png" alt="Card image cap"> 
+            <div class="card m-3" >
+              <img width="304" height="236" class="card-img-top" src="/media/gallery/+.png" alt="Card image cap"> 
               <div class="card-body">
                 <h5 class="card-title">Agrega una granja</h5>
                 <p class="card-text">En esta opción puedes agregar las granjas que quieras!</p>
@@ -29,9 +29,9 @@
         {% if object_list %}
             {% for granja in object_list %}
                 <div class="col-sm-3 ">
-                    <div class="card m-3 w-100 h-100" >
+                    <div class="card m-3" >
                     <a href="{% url 'granja:admin' granja.id %}">
-                    <img  class="card-img-top image" src="{{ granja.image.url }}" alt="Card image cap"> 
+                    <img  width="300" height="300" class="card-img-top image" src="{{ granja.image.url }}" alt="Card image cap"> 
                     </a>
                     <div class="card-body">
                         <h5 class="card-title">{{ granja.Name }}</h5>
@@ -49,7 +49,7 @@
         {% else %}
         <div class="col-sm-3 ">
             <div class="card m-3 w-100 h-100" >
-            <div class="card-body">
+            <div width="304" height="236" class="card-body">
                 <h5 class="card-title">No se encuentran Granjas registradas</h5>
                 <p class="card-text">Si desea por favor agregue suprimera granja, en el boton agregar de la primera tarjeta </p>
             </div>

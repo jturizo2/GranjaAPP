@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 #from django.contrib import admin
 #from django.urls import path
-from apps.Animal.views import index, animal_form, animal_list, animal_edit, animal_delete
+from apps.Animal.views import index, animal_form, animal_list, animal_edit, animal_delete,animal_view,animal_search
 app_name = 'animal'
 urlpatterns = [
     url(r'^$', index,name='index'),
@@ -9,5 +9,8 @@ urlpatterns = [
     url(r'^listar$', animal_list, name='list'),
     url(r'^editar/(?P<id_animal>\d+)/$', animal_edit,name='edit'),
     url(r'^eliminar/(?P<id_animal>\d+)/$', animal_delete, name='delete'),
+    url(r'^vista/(?P<id_animal>\d+)/$', animal_view, name='view'),
+    url(r'^buscar/$', animal_search, name='search'),
+
 
 ]
