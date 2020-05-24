@@ -1,0 +1,92 @@
+{% extends 'base/base.html' %}
+{% block content %} 
+<div class="container">
+    <h2>Adminstración de compra y ventas de animales </h2>
+    <div class="row">
+        <!--Colummna de filtros -->
+        <div class="col-3">
+            <div class="m-1">
+                <div class="m-2">
+                    <h5>Agregar movimiento</h5>
+                    <a href="{% url 'trans:new' %}" class="btn btn-success ">Agregar Movimiento</a>
+                </div>
+                <div class="m-2">
+                
+                <h5>Filtros:</h5>
+                <form action="{% url 'trans:search' %}" method="POST" class="form-inline my-2 my-lg-0">
+                    {% csrf_token %}
+                    <div class="container">
+
+                        <div class="row">
+                            <label for="id_Código_papa">{{ filters.classTrans.label }}</label>
+                            {{ filters.classTrans}} 
+                        </div>
+                        <div class="row">
+                            <label for="id_Código_papa">{{ filters.AnimalCode.label }}</label>
+                            {{ filters.AnimalCode}}
+                        </div>
+                        <h5>{{ filters.date.label }}</h5>
+                        <div class="row">
+                            <label for="id_datei">Inicial</label>
+                            <input type="date" class="form-control" value="1999-01-01" name="datei"  id="datei">
+                        </div>
+                        <div class="row">
+                            <label for="id_datef">Final</label>
+                            <input type="date" class="form-control" value="3000-01-01" name="datef"  id="datef">
+                        </div>
+                    </div>
+                    <button class=" center btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
+                </div>
+            </div>
+        </div>
+        <!--Colummna de resultados-->
+        <div class="col-9">
+            <div class="">
+                <!--Lista de Animales -->
+                {% if movs %}
+                <div class="mx-auto">
+                    <h2>Resultados:</h2>
+                </div>
+                
+                <div class="mx-auto">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Número de transacción</td>
+                                <th scope="col">Tipo de movimiento</td>
+                                <th scope="col">Fecha</td>
+                                <th scope="col">Animal</td>
+                                <th scope="col">Detalle</td>
+                                <th scope="col">Costo</td>
+                                <th scope="col">Acciones</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for mov in movs %}
+                            <tr>
+                                <td>{{mov.id}}</td>
+                                <td>{{mov.classTrans}}</td>
+                                <td>{{mov.date}}</td>
+                                <td>{{mov.AnimalCode}}</td>
+                                <td>{{mov.detail}}</td>
+                                <td>{{mov.Value}}</td>
+                                <td>
+                                    <div class="btn-group-vertical">
+                                        <div class="col-sm-6"> <a href="{% url 'trans:edit' mov.id %}" class="btn btn-success ">Editar</a></div>
+                                        <div class="col-sm-6"> <a href="{% url 'trans:delete' mov.id %}" class="btn btn-danger ">Borrar</a></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>   
+                </div>  
+            {% else %}
+                <h3> No se encuentran compras o ventas de animales registrados</h3>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

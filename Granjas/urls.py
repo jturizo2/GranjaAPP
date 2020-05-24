@@ -13,7 +13,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^granja/', include('apps.Granja.urls', namespace='granja')),
     url(r'^granjero/', include('apps.Granjero.urls')),
-    url(r'^transaccion/', include('apps.trans.urls')),
+    url(r'^transaccion/', include('apps.trans.urls', namespace='trans')),
     url(r'^animal/', include('apps.Animal.urls', namespace='animal')),
 
     #Gestion de usuarios

@@ -2,23 +2,23 @@
 {% block content %} 
 
 <div class="row">
-  <div class="col-sm-3">
-    <div class="card m-3 w-100 h-100" >
-      <div class="card-header">
-        Caacteristicas de la granja
-      </div>
-        <div class="card-body">
+      <div class="col-sm-2 m-3">
+        <div class="card m-3 w-100 h-100" >
+          <div class="card-header">
+            Caacteristicas de la granja
+          </div>
           <img width="304" height="236" class="card-img-top" src="{{ granj.image.url }}" alt="Card image cap">
-          <h5 class="card-title">Nombre: {{ granj.Name }}</h5>
-          <p class="card-text">Código:  {{ granj.Cod }}</p>
-          <p class="card-text">Hectareas: {{ granj.Hec }} </p>
-          <p class="card-text">Diviciones: {{ granj.Div }} </p>
-          <p class="card-text">Número de pozos:  {{ granj.NumPozos }}</p>
-        </div>
-      </div>  
-    </div>
+            <div class="card-body">
+              <h5 class="card-title">Nombre: {{ granj.Name }}</h5>
+              <p class="card-text">Código:  {{ granj.Cod }}</p>
+              <p class="card-text">Hectareas: {{ granj.Hec }} </p>
+              <p class="card-text">Diviciones: {{ granj.Div }} </p>
+              <p class="card-text">Número de pozos:  {{ granj.NumPozos }}</p>
+            </div>
+        </div>  
+      </div>
       <!-- Animales-->
-      <div class="col-sm-3">
+      <div class="col-sm-2 m-3">
         <div class="card m-3 w-100 h-100" >
           <div class="card-header">
             Administración de animales
@@ -28,9 +28,69 @@
             <p class="card-text">En esta opción puedes agregar, editar animales que pertenezcan a tu Granja</p>
           </div>
         </div>
-      </div>       
+      </div>     
+      <!-- Comercio-->
+      <div class="col-sm-2 m-3">
+        <div class="card m-3 w-100 h-100" >
+          <div class="card-header">
+            Comercio
+          </div>
+          <a href="{% url 'trans:list' %}"><img width="304" height="236" class="card-img-top" src="/media/gallery/nego.png" alt="Card image cap"> </a>
+          <div class="card-body">
+            <p class="card-text">En esta opción puedes registar las compras o las ventas de animales de tu granja</p>
+          </div>
+        </div>
+      </div>   
+      <!-- Insumos o servicios -->
+      <div class="col-sm-2 m-3">
+        <div class="card m-3 w-100 h-100" >
+          <div class="card-header">
+            Insumos o servicios
+          </div>
+          <a href=""><img width="304" height="236" class="card-img-top" src="/media/gallery/inse.png" alt="Card image cap"> </a>
+          <div class="card-body">
+            <p class="card-text">En esta opción puedes registar las compras de insumos o servicios que realices en tu granja</p>
+          </div>
+        </div>
+      </div>     
+      <!-- Producción de leche -->
+      <div class="col-sm-2 m-3">
+        <div class="card m-3 w-100 h-100" >
+          <div class="card-header">
+            Producción de leche
+          </div>
+          <a href=""><img width="304" height="236" class="card-img-top" src="/media/gallery/ordeñar.png" alt="Card image cap"> </a>
+          <div class="card-body">
+            <p class="card-text">En esta opción puedes registar los litros de leche producidos por tus animales</p>
+          </div>
+        </div>
+      </div>     
+      <!-- Registro de medicamentos  -->
+      <div class="col-sm-2 m-3">
+        <div class="card m-3 w-100 h-100" >
+          <div class="card-header">
+            Registro de medicamentos
+          </div>
+          <a href=""><img width="304" height="236" class="card-img-top" src="/media/gallery/medicamentos.png" alt="Card image cap"> </a>
+          <div class="card-body">
+            <p class="card-text">En esta opción puedes registar los medicamentos aplicados a tus animales</p>
+          </div>
+        </div>
+      </div>  
+      <!-- Control de peso  -->
+      <div class="col-sm-2 m-3">
+        <div class="card m-3 w-100 h-100" >
+          <div class="card-header">
+            Control de peso
+          </div>
+          <a href=""><img width="304" height="236" class="card-img-top" src="/media/gallery/peso.png" alt="Card image cap"> </a>
+          <div class="card-body">
+            <p class="card-text">En esta opción puedes registar la evolución del peso de tus animales</p>
+          </div>
+        </div>
+      </div>  
       <!-- Configuraciones-->
-      <div class="col-sm-3">
+      <div class="col-sm-2 m-3">
         <div class="card m-3 w-100 h-100" >
           <div class="card-header">
             Configuraciones 

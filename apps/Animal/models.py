@@ -2,6 +2,7 @@ from django.db import models
 import datetime
 from apps.Granjero.models import propietario
 from apps.Granja.models import granja  
+from django.contrib.auth.models import User
 
 class concepto (models.Model):
     concepto =  models.CharField(max_length = 30)
@@ -34,6 +35,7 @@ class proposito (models.Model):
         return "%s" % (self.tipo_proposito)
 
 class animal (models.Model):
+    user = models.ForeignKey (User, null = True, blank = True, on_delete = models.CASCADE)
     IdGranja = models.ForeignKey (granja, null = True, blank = True, on_delete = models.CASCADE)
     concepto = models.ForeignKey (concepto, null = True, blank = True, on_delete = models.CASCADE)
     nombre = models.CharField(max_length = 50)

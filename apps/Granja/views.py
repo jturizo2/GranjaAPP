@@ -18,6 +18,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 
+
 # Create your views here.
 @login_required
 def granja_admin(request,id_granja):

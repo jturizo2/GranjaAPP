@@ -2,6 +2,7 @@ from django.db import models
 import datetime
 from apps.Animal.models import animal 
 from django.contrib.auth.models import User
+from apps.Granja.models import granja  
 
 # Create your models here.
 class ClassTransInsServ (models.Model):
@@ -10,7 +11,7 @@ class ClassTransInsServ (models.Model):
     Detalle = models.CharField(max_length = 100)
     def __str__(self):
         return "%s" % (self.clase)
-
+#Se registran los posibles insumos o servicios que pueden registar en el aplicativo. 
 class serviInsu (models.Model):
     user = models.ForeignKey (User, null = True, blank = True, on_delete = models.CASCADE)
     Tipo  = models.ForeignKey (ClassTransInsServ, null = True, blank = True, on_delete = models.CASCADE)
@@ -38,6 +39,7 @@ class ClassTrans (models.Model):
         return "%s" % (self.clase)
 
 class transaction (models.Model):
+    IdGranja = models.ForeignKey (granja, null = True, blank = True, on_delete = models.CASCADE)
     user = models.ForeignKey (User, null = True, blank = True, on_delete = models.CASCADE)
     TypeTrans = models.ForeignKey (TypeTrans, null = True, blank = True, on_delete = models.CASCADE)
     classTrans = models.ForeignKey (ClassTrans, null = True, blank = True, on_delete = models.CASCADE)
