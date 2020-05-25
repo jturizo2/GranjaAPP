@@ -78,8 +78,6 @@ def search_mov(request):
 
         pass
     #------------------------------------------------------------
-    print(a)
-
     movs = transaction.objects.filter(a).order_by('id')
     contexto = {'movs': movs,
                 'granja': request.session['granja'],
