@@ -8,7 +8,10 @@
   `virtualenv <Nombre del entorno>`
 
 4. Activamos el entorno virtual, ingresamos dentro de la carpeta   <Nombre del entorno> y ejecutamos:
-  `Scripts\activate`    
+  `Scripts\activate`    WIN 
+source venv/bin/activate LINUX
+
+python -m pip install Pillow
 
 5. Descargamos el repositorio de GitHub, con el siguiente comando (Validamos que la máquinatenga Git instalado):
   `git clone https://github.com/jturizo2/GranjaAPP`
@@ -18,6 +21,12 @@
   `python manage.py makemigrations`               
   `python manage.py migrate`
 8. En la carpeta base del proyecto, corremos el servidor de desarrollo:
-	  `python manage.py runserver`
+	`python manage.py runserver`
+	`python manage.py runserver 0.0.0.0:5000` .
+sudo ufw allow 5000
+ fuser -k -n tcp 3000
+
+Run on differente port
+
 9. Procedemosa utilizar la aplicación. Estará disponible en la URL:
   http://localhost:8000/

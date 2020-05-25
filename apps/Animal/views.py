@@ -37,7 +37,7 @@ def animal_form(request):
         form = animalForm()
     contexto = {'form': form,
                 'granja': request.session['granja']}
-    return render(request,'animal/Animal_form.html',contexto)
+    return render(request,'Animal/animal_form.html',contexto)
 
 @login_required
 def animal_list(request):
@@ -47,7 +47,7 @@ def animal_list(request):
     contexto = {'animals': animales,
                 'granja': request.session['granja'],
                 'filters':filters}
-    return render(request, 'animal/animal_list.html', contexto)
+    return render(request, 'Animal/animal_list.html', contexto)
 
 @login_required
 def animal_view(request, id_animal):
@@ -55,7 +55,7 @@ def animal_view(request, id_animal):
     animales = animal.objects.filter(IdGranja=granj,id=id_animal).order_by('id')
     contexto = {'animals': animales,
                 'granja': request.session['granja']}
-    return render(request, 'animal/animal_card.html', contexto)
+    return render(request, 'Animal/animal_card.html', contexto)
 
 @login_required
 def animal_search(request):
@@ -113,7 +113,7 @@ def animal_search(request):
     contexto = {'animals': animales,
                 'granja': request.session['granja'],
                 'filters':filters}
-    return render(request, 'animal/animal_list.html', contexto)
+    return render(request, 'Animal/animal_list.html', contexto)
 
 @login_required
 def animal_edit(request, id_animal):
