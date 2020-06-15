@@ -1,3 +1,5 @@
+
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from apps.Animal.forms import animalForm,animalFilter
@@ -5,6 +7,18 @@ from apps.Animal.models import animal
 from apps.Granja.models import granja
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.contrib.auth.models import User
+from apps.trans.models import transaction,TypeTrans,ClassTrans
+import csv
+import json
+
+from django.http import JsonResponse
+
+
+
+import datetime
+
+animalesDescargar = []
 
 @login_required
 def index(request):
@@ -32,6 +46,24 @@ def animal_form(request):
                                 Código_mama=form.cleaned_data["Código_mama"],
                                 Código_papa=form.cleaned_data["Código_papa"])
             new_animal.save()
+
+            #-----Primera transacción-------------
+            tra = TypeTrans.objects.filter(Tipo='Comercio')[0]
+            tra1 = ClassTrans.objects.filter(clase='Compra')[0]
+            anima = animal.objects.filter(Codigo_animal=form.cleaned_data["Codigo_animal"])[0]
+            us = User.objects.get(username=request.user)
+            new_transaction = transaction(
+                                user=us,
+                                IdGranja=granj,
+                                TypeTrans= tra,
+                                classTrans=tra1,
+                                date=form.cleaned_data["Fecha_recibida"],
+                                AnimalCode=anima,
+                                detail="Animal ingresado automaticamente por concepto de " + str(form.cleaned_data["concepto"]),
+                                Value=form.cleaned_data["Valor_inicial"],
+                                quantity=0
+                                )
+            new_transaction.save()
         return redirect('animal:list')
     else:
         form = animalForm()
@@ -56,6 +88,18 @@ def animal_view(request, id_animal):
     contexto = {'animals': animales,
                 'granja': request.session['granja']}
     return render(request, 'Animal/animal_card.html', contexto)
+
+
+@login_required
+def animal_descargar(request):
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
+
+    writer = csv.writer(response, delimiter=';')
+    
+    writer.writerow(['First row', 'Foo', 'Bar', 'Baz'])
+    return response
 
 @login_required
 def animal_search(request):
@@ -112,7 +156,44 @@ def animal_search(request):
     animales = animal.objects.filter(a).order_by('id')
     contexto = {'animals': animales,
                 'granja': request.session['granja'],
-                'filters':filters}
+                'filters':filters,}
+
+    if "descargar" in request.POST:
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="Resultados_animales.csv"'
+        response.write(u'\ufeff'.encode('utf8'))
+        writer = csv.writer(response, delimiter=';')
+
+        writer.writerow(["Código de animal",
+                            "Nombre",
+                            "Granja",
+                            "concepto",
+                            "Valor_inicial",
+                            "Genero",
+                            "Etapa_productiva",
+                            "Raza",
+                            "propietario",
+                            "Proposito",
+                            "Fecha_recibida",
+                            "Fecha_nacimiento",
+                            "Código_papa"])
+
+        for ani in animales:
+            writer.writerow(['"' + ani.Codigo_animal + '"',
+                            ani.nombre,
+                            ani.IdGranja,
+                            ani.concepto,
+                            ani.Valor_inicial,
+                            ani.Genero,
+                            ani.Etapa_productiva,
+                            ani.Raza,
+                            ani.propietario,
+                            ani.Proposito,
+                            ani.Fecha_recibida,
+                            ani.Fecha_nacimiento,
+                            ani.Código_papa])
+        return response
+
     return render(request, 'Animal/animal_list.html', contexto)
 
 @login_required
@@ -126,6 +207,7 @@ def animal_edit(request, id_animal):
             form.save()
         return redirect('animal:list')
     return  render(request,'Animal/animal_form.html',{'form': form})
+
 @login_required
 def animal_delete(request, id_animal):
     animals = animal.objects.get(id=id_animal)

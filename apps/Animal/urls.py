@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^eliminar/(?P<id_animal>\d+)/$', animal_delete, name='delete'),
     url(r'^vista/(?P<id_animal>\d+)/$', animal_view, name='view'),
     url(r'^buscar/$', animal_search, name='search'),
+    url(r'^descargar/$', animal_descargar, name='descargar'),
 ]

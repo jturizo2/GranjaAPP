@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from django.urls import reverse_lazy
+#sys.setdefaultencoding('utf-8')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,7 +27,7 @@ SECRET_KEY = 'hdx)q8od^4=8-=i#m@v0khmc7&ahoo+3)^2dn9bup!tr3as@o&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['181.59.45.37','localhost']
 
 
 # Application definition
@@ -136,7 +137,7 @@ LOGOUT_REDIRECT_URL = reverse_lazy('login')
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 25
-EMAIL_HOST_USER = 'jorgeluissilvacorrea@gmail.com'
-DEFAULT_FROM_EMAIL = 'jorgeluissilvacorrea@gmail.com'
-EMAIL_HOST_PASSWORD = 'Jorge199422.'
+EMAIL_HOST_USER = 'appgranjas53@gmail.com'
+DEFAULT_FROM_EMAIL = 'appgranjas53@gmail.com'
+EMAIL_HOST_PASSWORD = 'AppGranjas123.'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

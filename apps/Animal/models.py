@@ -40,7 +40,7 @@ class animal (models.Model):
     concepto = models.ForeignKey (concepto, null = True, blank = True, on_delete = models.CASCADE)
     nombre = models.CharField(max_length = 50)
     Valor_inicial = models.FloatField()
-    Codigo_animal = models.CharField(max_length = 50)
+    Codigo_animal = models.CharField(max_length = 50, unique=True)
     Genero = models.ForeignKey (genero, null = True, blank = True, on_delete = models.CASCADE)
     Etapa_productiva = models.ForeignKey (etapa_productiva, null = True, blank = True, on_delete = models.CASCADE) 
     Raza = models.ForeignKey (raza, null = True, blank = True, on_delete = models.CASCADE)
@@ -53,5 +53,5 @@ class animal (models.Model):
     image = models.ImageField(upload_to = 'Animales/', default = 'gallery/static/images/no-img.jpg')
     
     def __str__(self):
-        return "%s" % (self.Codigo_animal)
+        return "%s %s"   % (self.Codigo_animal,self.nombre)
     

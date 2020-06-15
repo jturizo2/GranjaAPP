@@ -4,7 +4,6 @@ from apps.Granja.models import granja
 class granja_from(forms.ModelForm):
     class Meta:
         model = granja
-
         fields = [
                 'Cod',
                 'Name',

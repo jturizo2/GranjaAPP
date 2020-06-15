@@ -1,5 +1,5 @@
 from django import forms
-from apps.trans.models import serviInsu,transaction
+from apps.trans.models import serviInsu,transaction,transactionserviInsu
 
 class serviInsu_form(forms.ModelForm):
     class Meta:
@@ -43,7 +43,7 @@ class mov_form(forms.ModelForm):
 
         labels = {
                 'classTrans':'Tipo de movimiento',
-                'date':'Fecha de nacimiento',
+                'date':'Fecha de transacción',
                 'AnimalCode':'Código de animal',
                 'detail':'Detalle del movimiento',
                 'Value':'Costo',
@@ -75,3 +75,76 @@ class movFilter(forms.ModelForm):
                 'date': forms.DateInput(attrs={'class': 'form-control'}),
                 'AnimalCode': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+
+class InsServ_form(forms.ModelForm):
+    class Meta:
+        model = transactionserviInsu
+        fields = [
+                'Tipo',
+                'concepto',
+                'date',
+                'quantity',
+                'detail',
+        ]
+
+        labels = {
+                'Tipo':'Compa o Venta',
+                'concepto':'Insumo o servicio',
+                'date':'Fecha',
+                'quantity':'Cantidad',
+                'detail':'Detalle',
+        }
+        widgets = {
+                'Tipo':forms.Select(attrs={'class': 'form-control'}),
+                'concepto':forms.Select(attrs={'class': 'form-control'}),
+                'date':forms.DateInput(attrs={'class': 'form-control'}),
+                'quantity':forms.NumberInput(attrs={'class': 'form-control'}),
+                'detail':forms.TextInput(attrs={'class': 'form-control'}),
+        }   
+
+
+class InsServFilter(forms.ModelForm):
+    class Meta:
+        model = transactionserviInsu
+        fields = [
+                'Tipo',
+                'date',
+        ]
+
+        labels = {
+                'Tipo':'Compa o Venta',
+                'date':'Fecha',
+        }
+        widgets = {
+                'Tipo':forms.Select(attrs={'class': 'form-control'}),
+                'date':forms.DateInput(attrs={'class': 'form-control'}),
+        }    
+class InsServ_form_edit(forms.ModelForm):
+    class Meta:
+        model = transactionserviInsu
+        fields = [
+                'Tipo',
+                'concepto',
+                'date',
+                'Value',
+                'quantity',
+                'detail',
+        ]
+
+        labels = {
+                'Tipo':'Compa o Venta',
+                'concepto':'Insumo o servicio',
+                'date':'Fecha',
+                'Value':'Valor actual',
+                'quantity':'Cantidad',
+                'detail':'Detalle',
+        }
+        widgets = {
+                'Tipo':forms.Select(attrs={'class': 'form-control'}),
+                'concepto':forms.Select(attrs={'class': 'form-control'}),
+                'date':forms.DateInput(attrs={'class': 'form-control'}),
+                'Value':forms.NumberInput(attrs={'class': 'form-control'}),
+                'quantity':forms.NumberInput(attrs={'class': 'form-control'}),
+                'detail':forms.TextInput(attrs={'class': 'form-control'}),
+        }   
