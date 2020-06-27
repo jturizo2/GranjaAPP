@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib.auth.models import User
 from apps.trans.models import transaction,TypeTrans,ClassTrans
+import datetime
 import csv
 import json
 
@@ -176,9 +177,17 @@ def animal_search(request):
                             "Proposito",
                             "Fecha_recibida",
                             "Fecha_nacimiento",
-                            "Código_papa"])
+                            "Código_papa",
+                            "Código_mama",
+                            "Edad",
+                            "Tiempo Custodia"])
+
 
         for ani in animales:
+            hoy = datetime.date.today()
+            edad = str(hoy.year - ani.Fecha_nacimiento.year) + " años " +str(hoy.month - ani.Fecha_nacimiento.month) + " meses " + str(hoy.day - ani.Fecha_nacimiento.day) + " días"
+            tiempo = str(hoy.year - ani.Fecha_recibida.year) + " años " +str(hoy.month - ani.Fecha_recibida.month) + " meses " + str(hoy.day - ani.Fecha_recibida.day) + " días"
+
             writer.writerow(['"' + ani.Codigo_animal + '"',
                             ani.nombre,
                             ani.IdGranja,
@@ -191,7 +200,10 @@ def animal_search(request):
                             ani.Proposito,
                             ani.Fecha_recibida,
                             ani.Fecha_nacimiento,
-                            ani.Código_papa])
+                            ani.Código_papa,
+                            ani.Código_mama,
+                            edad,
+                            tiempo])
         return response
 
     return render(request, 'Animal/animal_list.html', contexto)
