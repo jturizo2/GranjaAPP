@@ -19,8 +19,7 @@ def mov_new(request):
     if request.method == 'POST':
         form = mov_form(request.POST)
         if form.is_valid():
-            print("jaja ")
-            print( form.cleaned_data["classTrans"])
+            
             granj = granja.objects.filter(id=request.session['idgranja'])[0]
             tra = TypeTrans.objects.filter(Tipo='Comercio')[0]
             us = User.objects.get(username=request.user)

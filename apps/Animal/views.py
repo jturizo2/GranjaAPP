@@ -15,10 +15,6 @@ import json
 
 from django.http import JsonResponse
 
-
-
-import datetime
-
 animalesDescargar = []
 
 @login_required
@@ -53,12 +49,15 @@ def animal_form(request):
             tra1 = ClassTrans.objects.filter(clase='Compra')[0]
             anima = animal.objects.filter(Codigo_animal=form.cleaned_data["Codigo_animal"])[0]
             us = User.objects.get(username=request.user)
+            date_trans = form.cleaned_data["Fecha_recibida"]
+            if date_trans == None :
+                date_trans = datetime.date.today()
             new_transaction = transaction(
                                 user=us,
                                 IdGranja=granj,
                                 TypeTrans= tra,
                                 classTrans=tra1,
-                                date=form.cleaned_data["Fecha_recibida"],
+                                date=date_trans,
                                 AnimalCode=anima,
                                 detail="Animal ingresado automaticamente por concepto de " + str(form.cleaned_data["concepto"]),
                                 Value=form.cleaned_data["Valor_inicial"],
