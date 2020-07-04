@@ -9,7 +9,7 @@ from apps.Granjero.forms import propietario_form
 from apps.trans.models import serviInsu
 from apps.trans.forms import serviInsu_form
 
-from apps.Animal.forms import concepto_form, genero_form, eProductiva_form, raza_form, proposito_form
+from apps.Animal.forms import animal, concepto_form, genero_form, eProductiva_form, raza_form, proposito_form
 
 from apps.Granja.models import granja
 from apps.Granja.forms import granja_from
@@ -25,9 +25,18 @@ def granja_admin(request,id_granja):
     granj = granja.objects.filter(id=id_granja)[0]
     request.session['granja'] = granj.Name
     request.session['idgranja'] = granj.id
+
+    #--------Cantidad de animales-------------------
+    animales = animal.objects.filter(IdGranja=granj)
+    i = 0
+    for ani in animales:
+        i = i + 1
+
     contexto = {'granja': request.session['granja'],
                 'idgranja': request.session['idgranja'],
-                'granj':granj}
+                'granj':granj,
+                'CantAnimales':i}
+                
     return render(request, 'Granja/index.html', contexto)
 
 @login_required

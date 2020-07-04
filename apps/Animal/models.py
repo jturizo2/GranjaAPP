@@ -53,5 +53,5 @@ class animal (models.Model):
     image = models.ImageField(upload_to = 'Animales/', default = 'gallery/static/images/no-img.jpg')
     
     def __str__(self):
-        return "%s %s"   % (self.Codigo_animal,self.nombre)
+        return "%s;%s"   % (self.Codigo_animal,self.nombre)
     

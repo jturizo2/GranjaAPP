@@ -148,9 +148,11 @@ def animal_search(request):
             b = request.POST["Proposito"]
             if b != '':
                 a = a & Q(Proposito=b)
-            b = Q(Fecha_recibida__gte=request.POST["Fecha_recibidai"]) & Q(Fecha_recibida__lte=request.POST["Fecha_recibidaf"])
+            
+            b = Q(Fecha_recibida__gte=request.POST["Fecha_recibidai"]) & Q(Fecha_recibida__lte=request.POST["Fecha_recibidaf"]) | Q(Fecha_recibida=None)
             a = a & b
-            b = Q(Fecha_nacimiento__gte=request.POST["Fecha_nacimientoi"]) & Q(Fecha_nacimiento__lte=request.POST["Fecha_nacimientof"])
+            
+            b = Q(Fecha_nacimiento__gte=request.POST["Fecha_nacimientoi"]) & Q(Fecha_nacimiento__lte=request.POST["Fecha_nacimientof"]) | Q(Fecha_nacimiento=None)
             a = a & b
     #------------------------------------------------------------
     animales = animal.objects.filter(a).order_by('id')
@@ -164,10 +166,11 @@ def animal_search(request):
         response.write(u'\ufeff'.encode('utf8'))
         writer = csv.writer(response, delimiter=';')
 
-        writer.writerow(["Código de animal",
+        writer.writerow(["#",
+                           "Código de animal",
                             "Nombre",
                             "Granja",
-                            "concepto",
+                            "Estado",
                             "Valor_inicial",
                             "Genero",
                             "Etapa_productiva",
@@ -181,13 +184,20 @@ def animal_search(request):
                             "Edad",
                             "Tiempo Custodia"])
 
-
+        x = 1
         for ani in animales:
             hoy = datetime.date.today()
-            edad = str(hoy.year - ani.Fecha_nacimiento.year) + " años " +str(hoy.month - ani.Fecha_nacimiento.month) + " meses " + str(hoy.day - ani.Fecha_nacimiento.day) + " días"
-            tiempo = str(hoy.year - ani.Fecha_recibida.year) + " años " +str(hoy.month - ani.Fecha_recibida.month) + " meses " + str(hoy.day - ani.Fecha_recibida.day) + " días"
+            edad = "No aplica"
+            if  ani.Fecha_nacimiento != None:
+                edad = str(hoy.year - ani.Fecha_nacimiento.year) + " A " +str(hoy.month - ani.Fecha_nacimiento.month) + " M "
+            
+            tiempo = "No aplica"
+            if ani.Fecha_recibida != None:
+                tiempo = str(hoy.year - ani.Fecha_recibida.year) + " A " +str(hoy.month - ani.Fecha_recibida.month) + " M "
+            
 
-            writer.writerow(['"' + ani.Codigo_animal + '"',
+            writer.writerow([str(x),
+                            '"' + ani.Codigo_animal + '"',
                             ani.nombre,
                             ani.IdGranja,
                             ani.concepto,
@@ -203,6 +213,7 @@ def animal_search(request):
                             ani.Código_mama,
                             edad,
                             tiempo])
+            x = x + 1
         return response
 
     return render(request, 'Animal/animal_list.html', contexto)

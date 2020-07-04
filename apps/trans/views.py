@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required 
 from apps.Granja.models import granja
-from apps.Animal.models import animal
+from apps.Animal.models import animal, concepto
 from apps.trans.forms import mov_form, movFilter, InsServFilter, InsServ_form,InsServ_form_edit
 from apps.trans.models import transaction,TypeTrans, transactionserviInsu,TypeTransserviInsu,serviInsu
 from django.contrib.auth.models import User
@@ -19,7 +19,6 @@ def mov_new(request):
     if request.method == 'POST':
         form = mov_form(request.POST)
         if form.is_valid():
-            
             granj = granja.objects.filter(id=request.session['idgranja'])[0]
             tra = TypeTrans.objects.filter(Tipo='Comercio')[0]
             us = User.objects.get(username=request.user)
@@ -35,6 +34,19 @@ def mov_new(request):
                                 quantity=0
                                 )
             new_transaction.save()
+            #----MArcamos el animal como vendido --------------------------
+            if str(form.cleaned_data["classTrans"]) == "Venta":
+                conp = concepto.objects.filter(concepto="Vendido")[0]
+                animal.objects.filter(Codigo_animal=str(form.cleaned_data["AnimalCode"]).split(";")[0]).update(concepto=conp)
+
+            if str(form.cleaned_data["classTrans"]) == "Compra":
+                conp = concepto.objects.filter(concepto="Comprado")[0]
+                animal.objects.filter(Codigo_animal=str(form.cleaned_data["AnimalCode"]).split(";")[0]).update(concepto=conp)
+
+            
+            #animal.save()
+
+
         return redirect('trans:list')
     else:
         form = mov_form()
