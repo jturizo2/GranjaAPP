@@ -91,15 +91,15 @@
                 <!--Lista de Animales -->
                 {% if animals %}
                 <div class="mx-auto">
-                    <h2>Resultados:</h2>
+                    <h2>Se obtuvieron {{ animals|length }} resultados encontrados</h2>
                 </div>
                 
                 <div class="mx-auto">
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">Estado</td>
                                 <th scope="col">Código de animal</td>
+                                <th scope="col">Estado</td>
                                 <th scope="col">Nombre del animal</td>
                                 <th scope="col">Imagen</td>
                                 <th scope="col">Acciones</td>
@@ -108,8 +108,8 @@
                         <tbody>
                             {% for animal in animals %}
                             <tr>
-                                <td  scope="row">{{animal.concepto}}</td>
                                 <td  scope="row">{{animal.Codigo_animal}}</td>
+                                <td  scope="row">{{animal.concepto}}</td>
                                 <td>{{animal.nombre}}</td>
                                 <td><img src="{{ animal.image.url }}"  width="70" height="70"> </td>
                                 <td>

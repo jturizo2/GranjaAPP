@@ -57,14 +57,14 @@ def animal_form(request):
                                 IdGranja=granj,
                                 TypeTrans= tra,
                                 classTrans=tra1,
-                                date=date_trans,
+                                date=date_trans, 
                                 AnimalCode=anima,
                                 detail="Animal ingresado automaticamente por concepto de " + str(form.cleaned_data["concepto"]),
                                 Value=form.cleaned_data["Valor_inicial"],
                                 quantity=0
                                 )
             new_transaction.save()
-        return redirect('animal:list')
+            return redirect('animal:list')
     else:
         form = animalForm()
     contexto = {'form': form,
