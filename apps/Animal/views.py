@@ -3,7 +3,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from apps.Animal.forms import animalForm,animalFilter
-from apps.Animal.models import animal
+from apps.Animal.models import animal, concepto
 from apps.Granja.models import granja
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
@@ -43,27 +43,6 @@ def animal_form(request):
                                 Código_mama=form.cleaned_data["Código_mama"],
                                 Código_papa=form.cleaned_data["Código_papa"])
             new_animal.save()
-
-            #-----Primera transacción-------------
-            tra = TypeTrans.objects.filter(Tipo='Comercio')[0]
-            tra1 = ClassTrans.objects.filter(clase='Compra')[0]
-            anima = animal.objects.filter(Codigo_animal=form.cleaned_data["Codigo_animal"])[0]
-            us = User.objects.get(username=request.user)
-            date_trans = form.cleaned_data["Fecha_recibida"]
-            if date_trans == None :
-                date_trans = datetime.date.today()
-            new_transaction = transaction(
-                                user=us,
-                                IdGranja=granj,
-                                TypeTrans= tra,
-                                classTrans=tra1,
-                                date=date_trans, 
-                                AnimalCode=anima,
-                                detail="Animal ingresado automaticamente por concepto de " + str(form.cleaned_data["concepto"]),
-                                Value=form.cleaned_data["Valor_inicial"],
-                                quantity=0
-                                )
-            new_transaction.save()
             return redirect('animal:list')
     else:
         form = animalForm()
@@ -74,7 +53,8 @@ def animal_form(request):
 @login_required
 def animal_list(request):
     granj = granja.objects.filter(id=request.session['idgranja'])[0]
-    animales = animal.objects.filter(IdGranja=granj).order_by('id')
+    conp = concepto.objects.filter(concepto="Vendido")[0]
+    animales = animal.objects.filter(IdGranja=granj).order_by('id').exclude(concepto=conp)
     filters = animalFilter()
     contexto = {'animals': animales,
                 'granja': request.session['granja'],
