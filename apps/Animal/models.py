@@ -36,6 +36,7 @@ class proposito (models.Model):
 
 class animal (models.Model):
     user = models.ForeignKey (User, null = True, blank = True, on_delete = models.CASCADE)
+    estado =  models.CharField(max_length = 50, default = "Activo")
     IdGranja = models.ForeignKey (granja, null = True, blank = True, on_delete = models.CASCADE)
     concepto = models.ForeignKey (concepto, null = True, blank = True, on_delete = models.CASCADE)
     nombre = models.CharField(max_length = 50)

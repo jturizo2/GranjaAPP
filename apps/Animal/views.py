@@ -1,5 +1,3 @@
-
-
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from apps.Animal.forms import animalForm,animalFilter
@@ -28,6 +26,7 @@ def animal_form(request):
         if form.is_valid():
             granj = granja.objects.filter(id=request.session['idgranja'])[0]
             new_animal = animal(IdGranja=granj,
+                                estado="Activo",
                                 image=form.cleaned_data["image"],
                                 Codigo_animal=form.cleaned_data["Codigo_animal"],
                                 concepto=form.cleaned_data["concepto"],
@@ -53,8 +52,7 @@ def animal_form(request):
 @login_required
 def animal_list(request):
     granj = granja.objects.filter(id=request.session['idgranja'])[0]
-    conp = concepto.objects.filter(concepto="Vendido")[0]
-    animales = animal.objects.filter(IdGranja=granj).order_by('id').exclude(concepto=conp)
+    animales = animal.objects.filter(IdGranja=granj).order_by('id').exclude(estado="Inactivo")
     filters = animalFilter()
     contexto = {'animals': animales,
                 'granja': request.session['granja'],
@@ -148,9 +146,10 @@ def animal_search(request):
 
         writer.writerow(["#",
                            "Código de animal",
+                           "Estado",
                             "Nombre",
                             "Granja",
-                            "Estado",
+                            "Concepto",
                             "Valor_inicial",
                             "Genero",
                             "Etapa_productiva",
@@ -178,6 +177,7 @@ def animal_search(request):
 
             writer.writerow([str(x),
                             '"' + ani.Codigo_animal + '"',
+                            ani.estado,
                             ani.nombre,
                             ani.IdGranja,
                             ani.concepto,

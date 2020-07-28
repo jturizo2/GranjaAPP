@@ -4,7 +4,17 @@
 <div class="container">
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
+
+        {% if form.Codigo_animal.errors %}
+            <ol>
+            {% for error in form.Codigo_animal.errors %}
+                <li  style="background-color:red;color:white;font-size: 30px;" ><strong>{{ error|escape }}</strong></li>
+            {% endfor %}
+            </ol>
+        {% endif %}
+
         {{ form.as_p}}
+
         <button type="submit">Guardar</button>
     </form>
 </div>

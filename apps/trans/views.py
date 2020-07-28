@@ -34,16 +34,8 @@ def mov_new(request):
                                 quantity=0
                                 )
             new_transaction.save()
-            #----MArcamos el animal como vendido --------------------------
-            if str(form.cleaned_data["classTrans"]) == "Venta":
-                conp = concepto.objects.filter(concepto="Vendido")[0]
-                animal.objects.filter(Codigo_animal=str(form.cleaned_data["AnimalCode"]).split(";")[0]).update(concepto=conp)
-
-            if str(form.cleaned_data["classTrans"]) == "Compra":
-                conp = concepto.objects.filter(concepto="Comprado")[0]
-                animal.objects.filter(Codigo_animal=str(form.cleaned_data["AnimalCode"]).split(";")[0]).update(concepto=conp)
-
-            
+            #----MArcamos el animal inactivo --------------------------
+            animal.objects.filter(Codigo_animal=str(form.cleaned_data["AnimalCode"]).split(";")[0]).update(estado="Inactivo")
             #animal.save()
 
 

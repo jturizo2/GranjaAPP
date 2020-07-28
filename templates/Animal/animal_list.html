@@ -99,8 +99,9 @@
                         <thead>
                             <tr>
                                 <th scope="col">Código de animal</td>
-                                <th scope="col">Estado</td>
+                                <th scope="col">Concepto de adquisición</td>
                                 <th scope="col">Nombre del animal</td>
+                                <th scope="col">Estado</td>
                                 <th scope="col">Imagen</td>
                                 <th scope="col">Acciones</td>
                             </tr>
@@ -111,6 +112,7 @@
                                 <td  scope="row">{{animal.Codigo_animal}}</td>
                                 <td  scope="row">{{animal.concepto}}</td>
                                 <td>{{animal.nombre}}</td>
+                                <td>{{animal.estado}}</td>
                                 <td><img src="{{ animal.image.url }}"  width="70" height="70"> </td>
                                 <td>
                                     <div class="btn-group-vertical">

@@ -23,7 +23,7 @@ class animalForm(forms.ModelForm):
 
         labels = {
                 'Codigo_animal': 'Código de animal',
-                'concepto': 'Estado',
+                'concepto': 'Concepto de adquisición',
                 'nombre': 'Nombre del animal',
                 'Valor_inicial': 'Valor inicial [$]',
                 'Genero': 'Genero',
@@ -143,7 +143,7 @@ class animalFilter(forms.ModelForm):
 
         labels = {
                 'Codigo_animal': 'Código de animal',
-                'concepto': 'Estado',
+                'concepto': 'Concepto de adquisición',
                 'nombre': 'Nombre del animal',
                 'Genero': 'Genero',
                 'Etapa_productiva': 'Etapa Productiva',
