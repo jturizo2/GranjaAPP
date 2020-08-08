@@ -111,7 +111,7 @@ def mov_delete(request, id_mov):
     animal.objects.filter(Codigo_animal=str(str(tr.AnimalCode).split(";")[0])).update(estado="Activo")
 
     if request.method == 'POST':
-        #tr.delete()
+        tr.delete()
         return redirect('trans:list')
     return  render(request,'Animal/comercio/mov_delete.html',{'data': tr})
 
