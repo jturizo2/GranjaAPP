@@ -107,8 +107,11 @@ def mov_edit(request, id_mov):
 @login_required
 def mov_delete(request, id_mov):
     tr = transaction.objects.get(id=id_mov)
+    print(str(tr.AnimalCode).split(";")[0])
+    animal.objects.filter(Codigo_animal=str(str(tr.AnimalCode).split(";")[0])).update(estado="Activo")
+
     if request.method == 'POST':
-        tr.delete()
+        #tr.delete()
         return redirect('trans:list')
     return  render(request,'Animal/comercio/mov_delete.html',{'data': tr})
 
