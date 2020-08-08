@@ -18,6 +18,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Descripción del animal</h5>
                             <p class="card-text">
+                                <b>Estado:</b>{{ animal.estado }}<br>
                                 <b>Código de animal:</b>{{ animal.Codigo_animal }}<br>
                                 <b>Nombre del animal:</b>{{ animal.nombre }}<br>
                                 <b>Estado:</b> {{ animal.concepto }} <br>
@@ -30,7 +31,7 @@
                                 <b>Fecha recibido:</b> {{ animal.Fecha_recibida }} <br>
                                 <b>Fecha nacimiento:</b> {{ animal.Fecha_nacimiento }} <br>
                                 <b>Código madre:</b> {{ animal.Código_mama }} <br>
-                                <b>Fecha padre:</b> {{ animal.Código_papa }} <br>
+                                <b>Código padre:</b> {{ animal.Código_papa }} <br>
                                 </p>
                                 
                                 <a class="btn btn-primary" href="{% url 'animal:edit' animal.id %}">Editar</a>

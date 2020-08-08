@@ -5,6 +5,7 @@ class animalForm(forms.ModelForm):
     class Meta:
         model = animal
         fields = [
+                'estado',
                 'Codigo_animal',
                 'concepto',
                 'nombre',
@@ -22,6 +23,7 @@ class animalForm(forms.ModelForm):
         ]
 
         labels = {
+                'estado':'Estado',
                 'Codigo_animal': 'Código de animal',
                 'concepto': 'Concepto de adquisición',
                 'nombre': 'Nombre del animal',
@@ -38,6 +40,7 @@ class animalForm(forms.ModelForm):
                 'image': 'Imagen',
         }
         widgets = {
+                'estado': forms.TextInput(attrs={'class': 'form-control'}),
                 'Codigo_animal': forms.TextInput(attrs={'class': 'form-control'}),
                 'concepto': forms.Select(attrs={'class': 'form-control'}),
                 'nombre': forms.TextInput(attrs={'class': 'form-control'}),
